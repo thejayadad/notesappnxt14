@@ -1,5 +1,7 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
+import AuthProvider from '@/SessionProvider'
+import Navbar from '@/components/Dashboard/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,16 +12,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <div className='flex h-screen flex-col md:flex-row md:overflow-hidden'>
-          <div  className="w-full flex-none md:w-64">
-            SIDEBAR
-          </div>
-          <div className="flex-grow p-6 md:overflow-y-auto md:p-12">
-          {children}
-          </div>
-        </div>
+    <html lang="en" data-theme="dark">
+      <body className={`your-existing-classes ${inter.className} p-10 flex flex-col gap-10 h-full transition-all duration-300 ease-in-out md:p-4 md:gap-4`}>
+        <AuthProvider>
+          <Navbar />
+        {children}
+        </AuthProvider>
         </body>
     </html>
   )
